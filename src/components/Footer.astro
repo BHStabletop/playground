@@ -1,0 +1,88 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="pg-footer">
+  <div class="pg-footer__inner">
+    <div class="pg-footer__brand">
+      <p class="pg-footer__logo">Playground</p>
+      <p class="pg-footer__tagline">{t("footer.tagline")}</p>
+    </div>
+
+    <nav class="pg-footer__links" aria-label="Footer">
+      <a href={getLocalizedPath("/produkte", lang)}>{t("nav.products")}</a>
+      <a href={getLocalizedPath("/#kontakt", lang)}>{t("nav.contact")}</a>
+      <a href={getLocalizedPath("/impressum", lang)}>{t("footer.impressum")}</a>
+      <a href={getLocalizedPath("/datenschutz", lang)}>{t("footer.datenschutz")}</a>
+      <button type="button" id="pg-cookie-settings">{t("footer.cookieSettings")}</button>
+    </nav>
+  </div>
+
+  <p class="pg-footer__copy">&copy; {new Date().getFullYear()} Playground. {t("footer.rights")}</p>
+</footer>
+
+<style>
+  .pg-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: clamp(40px, 6vw, 72px) clamp(20px, 6vw, 60px) 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .pg-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: space-between;
+  }
+  .pg-footer__logo {
+    font-family: var(--font-display-stack);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .pg-footer__tagline {
+    color: var(--color-text-muted);
+    margin: 4px 0 0;
+  }
+  .pg-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 24px;
+    align-items: center;
+  }
+  .pg-footer__links a,
+  .pg-footer__links button {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+  .pg-footer__links a:hover,
+  .pg-footer__links button:hover {
+    color: var(--color-accent);
+  }
+  .pg-footer__copy {
+    margin: 32px 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 720px) {
+    .pg-footer__inner {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("pg-cookie-settings")?.addEventListener("click", () => {
+    window.dispatchEvent(new CustomEvent("cookie-consent:open"));
+  });
+</script>

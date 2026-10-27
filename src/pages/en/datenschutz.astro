@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations, type Lang } from "../../i18n/ui";
+
+const lang: Lang = "en";
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t("datenschutz.title")} | Playground`}>
+  <section class="pg-section">
+    <div class="pg-prose">
+      <p class="pg-eyebrow">{t("datenschutz.eyebrow")}</p>
+      <h1>{t("datenschutz.title")}</h1>
+
+      <!-- PLACEHOLDER – replace with a privacy policy tailored to your site. -->
+      <p>
+        This privacy policy is a placeholder. Replace it with a text tailored to your
+        website (e.g. via a generator or your data protection officer).
+      </p>
+
+      <h2>Controller</h2>
+      <p>Company name, address, email (see legal notice)</p>
+
+      <h2>Hosting</h2>
+      <p>
+        This website is served via Cloudflare Pages. Technically necessary server log
+        data is processed in the course of this.
+      </p>
+
+      <h2>Cookies & analytics</h2>
+      <p>
+        Only technically necessary cookies are set. Analytics cookies (e.g. via Google
+        Tag Manager / Google Analytics) are loaded only after your consent via the cookie
+        banner. You can withdraw your consent at any time via "Cookie settings" in the
+        footer.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        You have the right to access, rectification, erasure, restriction of processing,
+        data portability and objection. Please contact the address above.
+      </p>
+    </div>
+  </section>
+</Layout>

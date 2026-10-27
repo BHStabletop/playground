@@ -1,0 +1,40 @@
+---
+import { getLangFromUrl, defaultLang } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+
+// Basis-Pfad ohne Sprach-Präfix ermitteln
+const base = Astro.url.pathname.replace(/^\/en/, "") || "/";
+const dePath = base;
+const enPath = base === "/" ? "/en" : `/en${base}`;
+---
+
+<div class="pg-lang" aria-label="Sprache wählen">
+  <a href={dePath} class={lang === "de" ? "is-active" : ""} hreflang="de">DE</a>
+  <span aria-hidden="true">/</span>
+  <a href={enPath} class={lang === "en" ? "is-active" : ""} hreflang="en">EN</a>
+</div>
+
+<style>
+  .pg-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .pg-lang a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  .pg-lang a.is-active {
+    color: var(--color-text);
+  }
+  .pg-lang a:hover {
+    color: var(--color-accent);
+  }
+  .pg-lang span {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+</style>

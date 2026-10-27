@@ -1,0 +1,88 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { products } from "../../data/products";
+import { useTranslations, getLocalizedPath, type Lang } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const lang: Lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={`${product.name[lang]} | Playground`} description={product.tagline[lang]}>
+  <article class="pg-section pg-detail">
+    <a class="pg-detail__back" href={getLocalizedPath("/produkte", lang)}>{t("productDetail.back")}</a>
+
+    <div class="pg-detail__grid">
+      <div class="pg-detail__media" style={`--card-accent:${product.accent ?? "var(--color-accent)"}`}>
+        <img src={product.image} alt={product.name[lang]} />
+      </div>
+
+      <div class="pg-detail__info">
+        <p class="pg-eyebrow">{product.tagline[lang]}</p>
+        <h1>{product.name[lang]}</h1>
+        <p class="pg-detail__desc">{product.description[lang]}</p>
+        <a class="pg-btn" href={getLocalizedPath("/#kontakt", lang)}>{t("productDetail.cta")}</a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .pg-detail__back {
+    display: inline-block;
+    margin-bottom: 28px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  .pg-detail__back:hover {
+    color: var(--color-accent);
+  }
+  .pg-detail__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .pg-detail__media {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: color-mix(in srgb, var(--card-accent) 18%, var(--color-surface));
+  }
+  .pg-detail__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pg-detail__info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .pg-detail__info h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.5rem);
+  }
+  .pg-detail__desc {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (min-width: 820px) {
+    .pg-detail__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+  }
+</style>

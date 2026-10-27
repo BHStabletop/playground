@@ -1,0 +1,83 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+import { products } from "../data/products";
+import ProductCard from "./ProductCard.astro";
+
+interface Props {
+  /** Wie viele Produkte anzeigen (Standard: 3). */
+  limit?: number;
+  /** Überschrift/Intro ausblenden (z. B. auf der Produktseite). */
+  showIntro?: boolean;
+}
+
+const { limit = 3, showIntro = true } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const items = products.slice(0, limit);
+---
+
+<section id="produkte" class="pg-section pg-products">
+  {
+    showIntro && (
+      <div class="pg-products__intro">
+        <p class="pg-eyebrow">{t("products.eyebrow")}</p>
+        <h2>{t("products.heading")}</h2>
+        <p>{t("products.subtitle")}</p>
+      </div>
+    )
+  }
+
+  <div class="pg-products__grid">
+    {items.map((product) => <ProductCard product={product} />)}
+  </div>
+
+  {
+    showIntro && products.length > limit && (
+      <a class="pg-btn pg-btn--secondary" href={getLocalizedPath("/produkte", lang)}>
+        {t("products.viewAll")}
+      </a>
+    )
+  }
+</section>
+
+<style>
+  .pg-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .pg-products__intro {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 640px;
+  }
+  .pg-products__intro h2 {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+    margin: 0;
+  }
+  .pg-products__intro p {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .pg-products__grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .pg-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 960px) {
+    .pg-products__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

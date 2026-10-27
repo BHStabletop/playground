@@ -1,0 +1,41 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="pg-hero">
+  <div class="pg-hero__content">
+    <p class="pg-eyebrow">{t("hero.eyebrow")}</p>
+    <h1 set:html={t("hero.headline")} />
+    <p class="pg-hero__body">{t("hero.body")}</p>
+    <a class="pg-btn" href={getLocalizedPath("/produkte", lang)}>{t("hero.cta")}</a>
+  </div>
+</section>
+
+<style>
+  .pg-hero {
+    padding: clamp(72px, 12vw, 160px) clamp(20px, 6vw, 120px);
+    max-width: 1440px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .pg-hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .pg-hero h1 {
+    font-size: clamp(2.6rem, 1.8rem + 3.5vw, 5.5rem);
+    line-height: 1.04;
+    margin: 0;
+  }
+  .pg-hero__body {
+    max-width: 580px;
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 1.125rem;
+  }
+</style>

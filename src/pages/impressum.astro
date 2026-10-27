@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const lang: Lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t("impressum.title")} | Playground`}>
+  <section class="pg-section">
+    <div class="pg-prose">
+      <p class="pg-eyebrow">{t("impressum.eyebrow")}</p>
+      <h1>{t("impressum.title")}</h1>
+
+      <!-- PLATZHALTER – mit echten Angaben ersetzen (gesetzlich vorgeschrieben, § 5 DDG/TMG). -->
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        Firmenname<br />
+        Straße und Hausnummer<br />
+        PLZ Ort
+      </p>
+
+      <h2>Vertreten durch</h2>
+      <p>Name der vertretungsberechtigten Person</p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: +49 …<br />
+        E-Mail: hallo@playground.example
+      </p>
+
+      <h2>Umsatzsteuer-ID</h2>
+      <p>USt-IdNr. gemäß § 27 a UStG: DE…</p>
+
+      <h2>Verantwortlich für den Inhalt</h2>
+      <p>Name, Anschrift (wie oben)</p>
+    </div>
+  </section>
+</Layout>

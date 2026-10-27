@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="ueber-uns" class="pg-section pg-brand">
+  <p class="pg-eyebrow">{t("brand.eyebrow")}</p>
+  <h2>{t("brand.heading")}</h2>
+  <p class="pg-brand__body">{t("brand.body")}</p>
+  <a class="pg-btn pg-btn--secondary" href={getLocalizedPath("/#kontakt", lang)}>{t("brand.cta")}</a>
+</section>
+
+<style>
+  .pg-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+  .pg-brand h2 {
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+    margin: 0;
+  }
+  .pg-brand__body {
+    max-width: 640px;
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+</style>

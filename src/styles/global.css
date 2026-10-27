@@ -89,3 +89,32 @@ a {
   background: var(--color-surface);
   color: var(--color-text);
 }
+
+/* Small uppercase label above a heading */
+.pg-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* Readable text column for legal / long-form pages */
+.pg-prose {
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+.pg-prose h2 {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  margin: 2em 0 0.5em;
+}
+.pg-prose p {
+  margin: 0 0 1em;
+}
+.pg-prose a {
+  color: var(--color-accent);
+}

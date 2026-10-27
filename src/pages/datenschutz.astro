@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useTranslations, type Lang } from "../i18n/ui";
+
+const lang: Lang = "de";
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t("datenschutz.title")} | Playground`}>
+  <section class="pg-section">
+    <div class="pg-prose">
+      <p class="pg-eyebrow">{t("datenschutz.eyebrow")}</p>
+      <h1>{t("datenschutz.title")}</h1>
+
+      <!-- PLATZHALTER – mit einer echten, auf deine Seite zugeschnittenen Datenschutzerklärung ersetzen. -->
+      <p>
+        Diese Datenschutzerklärung ist ein Platzhalter. Ersetze sie durch einen auf
+        deine Website zugeschnittenen Text (z. B. über einen Generator wie
+        e-recht24.de oder deinen Datenschutzbeauftragten).
+      </p>
+
+      <h2>Verantwortlicher</h2>
+      <p>Firmenname, Anschrift, E-Mail (siehe Impressum)</p>
+
+      <h2>Hosting</h2>
+      <p>
+        Diese Website wird über Cloudflare Pages ausgeliefert. Dabei werden technisch
+        notwendige Server-Logdaten verarbeitet.
+      </p>
+
+      <h2>Cookies & Analyse</h2>
+      <p>
+        Es werden nur technisch notwendige Cookies gesetzt. Analyse-Cookies (z. B. über
+        Google Tag Manager / Google Analytics) werden erst nach deiner Einwilligung über
+        das Cookie-Banner geladen. Die Einwilligung kannst du jederzeit über
+        „Cookie-Einstellungen" im Footer widerrufen.
+      </p>
+
+      <h2>Deine Rechte</h2>
+      <p>
+        Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
+        Verarbeitung, Datenübertragbarkeit und Widerspruch. Wende dich dazu an die oben
+        genannte Kontaktadresse.
+      </p>
+    </div>
+  </section>
+</Layout>
