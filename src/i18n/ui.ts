@@ -23,7 +23,7 @@ export const ui = {
 
     // Hero
     "hero.eyebrow": "Willkommen",
-    "hero.headline": "Deine Marke,<br />dein Auftritt",
+    "hero.headline": "Playground",
     "hero.body":
       "Dies ist das Marken-Grundgerüst. Ersetze Texte, Bilder und Farben, um deine eigene Seite zu gestalten.",
     "hero.cta": "Produkte entdecken",
@@ -97,7 +97,7 @@ export const ui = {
     "nav.menu": "Open menu",
 
     "hero.eyebrow": "Welcome",
-    "hero.headline": "Your brand,<br />your stage",
+    "hero.headline": "Playground",
     "hero.body":
       "This is the brand scaffold. Replace copy, images and colors to craft your own site.",
     "hero.cta": "Explore products",
