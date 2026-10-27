@@ -1,0 +1,19 @@
+# Copy to .dev.vars for local testing with `npx wrangler pages dev dist`.
+# In production, set these as encrypted secrets in Cloudflare Pages instead
+# (Dashboard -> your project -> Settings -> Environment variables, or via
+# `npx wrangler pages secret put <NAME> --project-name=<project>`).
+
+# Long-lived access token of YOUR OWN Instagram Business/Creator account,
+# generated via the Meta Graph API Explorer / a Meta app with the
+# instagram_basic and pages_show_list permissions.
+IG_ACCESS_TOKEN=
+
+# The Instagram Business Account ID behind that same access token.
+IG_BUSINESS_ID=
+
+# Optional overrides (defaults shown):
+# Only posts whose caption contains this hashtag are returned. Leave empty
+# to return every post from the account (no hashtag filter).
+# IG_HASHTAG=
+# Public handle used for the "see more" link in the UI.
+# IG_TARGET_USERNAME=

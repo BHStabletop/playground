@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import InstagramFeed from "../components/InstagramFeed.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout>
+  <main>
+    <section class="pg-section pg-hero">
+      <h1 set:html={t("hero.headline")} />
+      <p>{t("hero.body")}</p>
+    </section>
+
+    <InstagramFeed />
+  </main>
+
+  <footer class="pg-footer">
+    <p>&copy; {new Date().getFullYear()} Playground. {t("footer.rights")}</p>
+  </footer>
+</Layout>
+
+<style>
+  .pg-hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .pg-hero h1 {
+    font-size: clamp(2.5rem, 1.8rem + 3vw, 5rem);
+    line-height: 1.05;
+    margin: 0;
+  }
+  .pg-hero p {
+    max-width: 560px;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .pg-footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const privacyPath = getLocalizedPath("/datenschutz", lang);
+---
+
+<div id="cookie-banner" class="pg-cookie" role="dialog" aria-live="polite" aria-label={t("cookie.title")}>
+  <div class="pg-cookie__inner">
+    <div class="pg-cookie__text">
+      <p class="pg-cookie__title">{t("cookie.title")}</p>
+      <p>
+        {t("cookie.text")}{" "}
+        <a href={privacyPath}>{t("cookie.privacyLink")}</a>.
+      </p>
+    </div>
+    <div class="pg-cookie__actions">
+      <button type="button" id="cookie-reject" class="pg-btn pg-btn--secondary">{t("cookie.rejectAll")}</button>
+      <button type="button" id="cookie-accept" class="pg-btn">{t("cookie.acceptAll")}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pg-cookie {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+    background: var(--color-surface);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px clamp(20px, 5vw, 60px);
+  }
+  .pg-cookie.pg-cookie--visible {
+    display: block;
+  }
+  .pg-cookie__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .pg-cookie__text {
+    max-width: 640px;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+  .pg-cookie__title {
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .pg-cookie__text p:not(.pg-cookie__title) {
+    margin-top: 6px;
+  }
+  .pg-cookie__text a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .pg-cookie__actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 800px) {
+    .pg-cookie__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = "cookie-consent";
+
+  function pushConsentUpdate(granted: boolean) {
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(...args: unknown[]) {
+      (window as any).dataLayer.push(args);
+    }
+    gtag("consent", "update", { analytics_storage: granted ? "granted" : "denied" });
+  }
+
+  function initCookieBanner() {
+    const banner = document.getElementById("cookie-banner");
+    if (!banner) return;
+
+    const acceptBtn = document.getElementById("cookie-accept");
+    const rejectBtn = document.getElementById("cookie-reject");
+
+    const show = () => banner.classList.add("pg-cookie--visible");
+    const hide = () => banner.classList.remove("pg-cookie--visible");
+
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      stored = null;
+    }
+
+    if (!stored) show();
+
+    acceptBtn?.addEventListener("click", () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, "accepted");
+      } catch {}
+      pushConsentUpdate(true);
+      hide();
+    });
+
+    rejectBtn?.addEventListener("click", () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, "rejected");
+      } catch {}
+      pushConsentUpdate(false);
+      hide();
+    });
+
+    window.addEventListener("cookie-consent:open", show);
+  }
+
+  initCookieBanner();
+</script>
