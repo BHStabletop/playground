@@ -111,6 +111,7 @@ const privacyPath = getLocalizedPath("/datenschutz", lang);
         localStorage.setItem(STORAGE_KEY, "accepted");
       } catch {}
       pushConsentUpdate(true);
+      window.dispatchEvent(new Event("cookie-consent-updated"));
       hide();
     });
 
@@ -119,6 +120,7 @@ const privacyPath = getLocalizedPath("/datenschutz", lang);
         localStorage.setItem(STORAGE_KEY, "rejected");
       } catch {}
       pushConsentUpdate(false);
+      window.dispatchEvent(new Event("cookie-consent-updated"));
       hide();
     });
 
