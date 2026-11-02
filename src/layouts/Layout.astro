@@ -30,10 +30,13 @@ const { title = t("site.title"), description = t("site.description") } = Astro.p
       GTM_ID && (
         <>
           <script is:inline define:vars={{ GTM_ID }}>
+            // Initialize dataLayer and Consent Mode FIRST
             window.dataLayer = window.dataLayer || [];
             function gtag() {
               dataLayer.push(arguments);
             }
+
+            // Set consent to DENIED by default (no tracking until user consents)
             gtag("consent", "default", {
               ad_storage: "denied",
               ad_user_data: "denied",
@@ -42,10 +45,12 @@ const { title = t("site.title"), description = t("site.description") } = Astro.p
               wait_for_update: 500,
             });
 
-            function loadGTM() {
+            // Only load GTM if user has ALREADY consented (on return visits)
+            function loadGTMIfConsented() {
               try {
                 const consent = localStorage.getItem("cookie-consent");
                 if (consent === "accepted") {
+                  // Update consent to GRANTED
                   gtag("consent", "update", { analytics_storage: "granted" });
                   // Load GTM script only if not already loaded
                   if (!document.querySelector(`script[src*="googletagmanager"]`)) {
@@ -61,15 +66,17 @@ const { title = t("site.title"), description = t("site.description") } = Astro.p
                     })(window, document, "script", "dataLayer", GTM_ID);
                   }
                 }
-              } catch (e) {}
+              } catch (e) {
+                // localStorage might be disabled - consent remains denied
+              }
             }
 
-            // Load GTM immediately if already consented
-            loadGTM();
+            // IMPORTANT: Only load GTM on page load IF already consented
+            loadGTMIfConsented();
 
-            // Also listen for cookie consent changes
-            window.addEventListener("cookie-consent-updated", () => {
-              loadGTM();
+            // Listen for user consent changes and load GTM when they accept
+            window.addEventListener("cookie-consent-updated", (e) => {
+              loadGTMIfConsented();
             });
           </script>
         </>
@@ -77,18 +84,7 @@ const { title = t("site.title"), description = t("site.description") } = Astro.p
     }
   </head>
   <body class="font-sans antialiased">
-    {
-      GTM_ID && (
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style="display:none;visibility:hidden"
-          />
-        </noscript>
-      )
-    }
+    {/* GTM noscript fallback - will only work if user has given consent */}
 
     <Header />
     <main>
