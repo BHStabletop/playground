@@ -1,0 +1,28 @@
+---
+interface Props {
+  tone?: "accent" | "white";
+  class?: string;
+}
+
+const { tone = "accent", class: className = "" } = Astro.props;
+// Platzhalter-Wortmarke, bis die Logo-Dateien (Logo_Playground_RGB / _WEISS) in /public/images liegen.
+---
+
+<span class:list={["pg-logo", `pg-logo--${tone}`, className]}>PLAYGROUND</span>
+
+<style>
+  .pg-logo {
+    display: inline-block;
+    font-family: var(--font-display-stack);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .pg-logo--accent {
+    color: var(--color-accent);
+  }
+  .pg-logo--white {
+    color: #fff;
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+/** Versetztes Kachelraster (Figma „Made to be seen“). Füllt sich aus /api/instagram, sonst bleiben neutrale Flächen. */
+const rows = [4, 5];
+---
+
+<div class="pg-wall" data-feed-wall>
+  {
+    rows.map((count, r) => (
+      <div class:list={["pg-wall__row", `pg-wall__row--${r}`]}>
+        {Array.from({ length: count }, () => (
+          <a class="pg-wall__tile" tabindex="-1" aria-hidden="true" />
+        ))}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .pg-wall {
+    --tile: clamp(120px, 15.3vw, 220px);
+    --gap: 20px;
+    display: grid;
+    gap: 23px;
+    overflow: hidden;
+  }
+  .pg-wall__row {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--gap);
+  }
+  .pg-wall__row--1 {
+    margin-right: calc(var(--tile) * -0.5);
+  }
+  .pg-wall__tile {
+    flex: none;
+    width: var(--tile);
+    aspect-ratio: 220 / 245;
+    background: var(--color-placeholder) center / cover no-repeat;
+  }
+  .pg-wall__tile[href]:hover {
+    filter: brightness(1.1);
+  }
+</style>
+
+<script>
+  type Post = { mediaUrl?: string; permalink: string; caption?: string };
+
+  const wall = document.querySelector<HTMLElement>("[data-feed-wall]");
+  if (wall) {
+    fetch("/api/instagram")
+      .then((r) => (r.ok ? r.json() : { posts: [] }))
+      .then((data: { posts?: Post[] }) => {
+        const posts = (data.posts ?? []).filter((p) => p.mediaUrl);
+        wall.querySelectorAll<HTMLAnchorElement>(".pg-wall__tile").forEach((tile, i) => {
+          const post = posts[i];
+          if (!post) return;
+          tile.href = post.permalink;
+          tile.target = "_blank";
+          tile.rel = "noopener noreferrer";
+          tile.removeAttribute("tabindex");
+          tile.removeAttribute("aria-hidden");
+          tile.setAttribute("aria-label", post.caption?.slice(0, 120) || "Instagram");
+          tile.style.backgroundImage = `url("${post.mediaUrl}")`;
+        });
+      })
+      .catch(() => {});
+  }
+</script>

@@ -1,0 +1,98 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/ui";
+import { collections } from "../data/collections";
+import { INSTAGRAM_URL } from "../consts";
+import PageHero from "./PageHero.astro";
+import Split from "./Split.astro";
+import Slider from "./Slider.astro";
+import FeedWall from "./FeedWall.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const path = (p: string) => getLocalizedPath(p, lang);
+---
+
+<PageHero title={t("home.hero")} image="/images/home-hero.jpg" />
+
+<section class="pg-section pg-intro">
+  <h2>{t("home.intro.heading")}</h2>
+  <p class="pg-lead">{t("home.intro.body")}</p>
+  <a class="pg-btn" href={path("/ueber-die-marke")}>{t("home.intro.cta")}</a>
+</section>
+
+<Split heading={t("home.collections.heading")} bleed>
+  <Slider label={t("home.collections.heading")}>
+    {
+      collections.map((c) => (
+        <a class="pg-teaser" href={path(`/kollektionen/${c.slug}`)}>
+          <img src={c.teaser} alt="" loading="lazy" />
+          <span class="pg-label">{c.name}</span>
+        </a>
+      ))
+    }
+  </Slider>
+  <a class="pg-btn pg-home__more" href={path("/kollektionen")}>{t("home.collections.cta")}</a>
+</Split>
+
+<Split heading={t("home.feed.heading")} side="right" bleed>
+  <FeedWall />
+</Split>
+
+<section class="pg-section pg-intro pg-intro--feed">
+  <p class="pg-lead">{t("home.feed.body")}</p>
+  <a class="pg-btn" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">{t("home.feed.cta")}</a>
+</section>
+
+<Split heading={t("home.contact.heading")} id="kontakt" bleed>
+  <img class="pg-home__stage" src="/images/home-contact.jpg" alt="" loading="lazy" />
+  <p class="pg-lead pg-home__contact">{t("home.contact.body")}</p>
+  <a class="pg-btn" href={`mailto:${t("contact.email")}`}>{t("home.contact.cta")}</a>
+</Split>
+
+<style>
+  .pg-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    padding-inline: 20px;
+  }
+  .pg-intro h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+    line-height: 1.05;
+  }
+  .pg-intro--feed {
+    padding-top: 0;
+  }
+
+  .pg-teaser {
+    display: grid;
+    gap: 22px;
+    width: clamp(240px, 26.4vw, 380px);
+    text-decoration: none;
+  }
+  .pg-teaser img {
+    width: 100%;
+    aspect-ratio: 380 / 520;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  .pg-teaser:hover .pg-label {
+    color: var(--color-accent);
+  }
+  .pg-home__more {
+    margin-top: 64px;
+  }
+
+  .pg-home__stage {
+    width: 100%;
+    aspect-ratio: 1030 / 454;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  .pg-home__contact {
+    margin: clamp(32px, 4vw, 56px) 0 48px;
+  }
+</style>

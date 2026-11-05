@@ -1,0 +1,41 @@
+---
+/** Vollflächiges Bühnenbild (Figma: 1440×850) mit großer oranger Headline unten links. */
+interface Props {
+  title: string;
+  image: string;
+  alt?: string;
+}
+
+const { title, image, alt = "" } = Astro.props;
+---
+
+<section class="pg-hero">
+  <img class="pg-hero__img" src={image} alt={alt} fetchpriority="high" />
+  <h1 class="pg-hero__title">{title}</h1>
+</section>
+
+<style>
+  .pg-hero {
+    position: relative;
+    height: clamp(520px, 59vw, 850px);
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+  .pg-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pg-hero__title {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    padding-left: clamp(4px, 0.4vw, 8px);
+    color: var(--color-accent);
+    font-size: clamp(4.5rem, 1rem + 12vw, 12rem);
+    line-height: 0.82;
+    letter-spacing: -0.01em;
+    max-width: 8ch;
+  }
+</style>

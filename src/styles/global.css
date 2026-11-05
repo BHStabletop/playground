@@ -1,21 +1,48 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens — neutral placeholders. Replace these values with your brand.
+   PLAYGROUND design tokens (Figma: PG-Screendesign)
    --------------------------------------------------------------------------- */
-:root {
-  --color-ground: #1a1a1a;
-  --color-surface: #242424;
-  --color-text: #f5f5f5;
-  --color-text-muted: rgba(245, 245, 245, 0.72);
-  --color-accent: #6c8cff;
-  --color-accent-contrast: #ffffff;
 
-  /* Font stacks: Google Fonts (if consented) fallback to system fonts */
+/* Lizenz-Schriften: Dateien in /public/fonts ablegen, dann greifen sie automatisch. */
+@font-face {
+  font-family: "Boogy Brut";
+  src: url("/fonts/BoogyBrut-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Compatil Fact";
+  src: url("/fonts/CompatilFact-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Compatil Fact";
+  src: url("/fonts/CompatilFact-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --color-ground: #000000;
+  --color-surface: #141414;
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.72);
+  --color-accent: #ed6b1c;
+  --color-accent-contrast: #ffffff;
+  --color-rule: rgba(255, 255, 255, 0.45);
+  --color-placeholder: #d9d9d9;
+
   --font-sans-stack:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+    "Compatil Fact", "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
     sans-serif;
-  --font-display-stack: Georgia, "Times New Roman", serif;
+  --font-display-stack: "Boogy Brut", Georgia, "Times New Roman", serif;
+
+  /* Figma-Raster 1440px: Inhalt beginnt bei 250px, rechte Kante bei 1190px */
+  --page-max: 1440px;
+  --content-inset: clamp(20px, 17.36vw, 250px);
+  --section-gap: clamp(96px, 14vw, 200px);
 
   --radius-pill: 100px;
   --button-height: 53px;
@@ -37,39 +64,64 @@ body {
   font-family: var(--font-sans-stack);
 }
 
+body {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
 h1,
 h2,
 h3 {
   font-family: var(--font-display-stack);
-  text-wrap: pretty;
+  font-weight: 700;
+  text-wrap: balance;
 }
 
 a {
-  color: var(--color-accent);
+  color: inherit;
   transition:
     color var(--dur-fast) var(--ease-soft),
     opacity var(--dur-fast) var(--ease-soft);
 }
 
-/* Layout section wrapper */
-.pg-section {
-  padding: clamp(56px, 9vw, 120px) clamp(20px, 6vw, 120px);
-  max-width: 1440px;
-  margin: 0 auto;
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
-/* Pill button */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Section wrapper — eine Sektion je Figma-Block */
+.pg-section {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-block: calc(var(--section-gap) / 2);
+}
+
+/* Fließtext-Spalte (Figma: 625px, 20/28) */
+.pg-lead {
+  max-width: 625px;
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Orange Pill-Button (Figma: 53px hoch, 20px Bold) */
 .pg-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.55em;
   height: var(--button-height);
-  padding: 0 26px;
+  padding: 0 32px;
   border: 0;
   border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: 1.125rem;
+  font-family: var(--font-sans-stack);
+  font-weight: 700;
+  font-size: 1.25rem;
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
@@ -81,32 +133,39 @@ a {
     transform var(--dur-fast) var(--ease-soft);
 }
 .pg-btn:hover {
-  filter: brightness(0.94);
+  filter: brightness(1.08);
 }
 .pg-btn:active {
   transform: scale(0.985);
 }
-.pg-btn--secondary {
-  background: var(--color-surface);
-  color: var(--color-text);
+.pg-btn--dark {
+  background: var(--color-ground);
 }
 
-/* Small uppercase label above a heading */
-.pg-eyebrow {
+/* Versal-Label für Kollektions- und Serienname (Figma: 22px Bold, +1.1px) */
+.pg-label {
+  font-weight: 700;
+  font-size: clamp(1rem, 0.85rem + 0.4vw, 1.375rem);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-accent);
+  line-height: 1.27;
   margin: 0;
 }
 
-/* Readable text column for legal / long-form pages */
+/* Legal pages */
 .pg-prose {
   max-width: 760px;
   margin: 0 auto;
-  line-height: 1.7;
+  padding: 0 20px;
+  line-height: 1.6;
+  font-size: 1.0625rem;
   color: var(--color-text-muted);
+}
+.pg-prose h1 {
+  color: var(--color-accent);
+  font-size: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+  line-height: 1.05;
+  margin: 0 0 0.8em;
 }
 .pg-prose h2 {
   color: var(--color-text);
@@ -118,4 +177,25 @@ a {
 }
 .pg-prose a {
   color: var(--color-accent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

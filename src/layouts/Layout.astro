@@ -26,27 +26,6 @@ const { title = t("site.title"), description = t("site.description") } = Astro.p
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
-    {/* Google Fonts - only load if user consented */}
-    <script is:inline>
-      function loadGoogleFonts() {
-        try {
-          const consent = localStorage.getItem("cookie-consent");
-          if (consent === "accepted" && !document.querySelector('link[href*="fonts.googleapis.com"]')) {
-            // Load Inter font from Google Fonts
-            const link = document.createElement("link");
-            link.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
-            link.rel = "stylesheet";
-            document.head.appendChild(link);
-          }
-        } catch (e) {}
-      }
-
-      // Load fonts immediately if already consented
-      loadGoogleFonts();
-
-      // Also load when user consents
-      window.addEventListener("cookie-consent-updated", loadGoogleFonts);
-    </script>
 
     {
       GTM_ID && (

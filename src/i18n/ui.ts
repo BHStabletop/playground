@@ -9,66 +9,57 @@ export const defaultLang: Lang = "de";
 
 export const ui = {
   de: {
-    "site.title": "Playground | Deine Marke",
+    "site.title": "PLAYGROUND | Your stage. Your rules.",
     "site.description":
-      "Playground – Marken- und Produktseite auf Basis von Astro, Tailwind CSS und Cloudflare Pages.",
+      "PLAYGROUND ist die Bühne für kulinarische Kreativität: designorientierte Tischkollektionen von BHS tabletop für experimentelles, modernes Food-Design.",
 
     // Navigation
     "nav.home": "Startseite",
-    "nav.products": "Produkte",
-    "nav.about": "Über uns",
+    "nav.collections": "Kollektionen",
+    "nav.about": "Über die Marke",
     "nav.contact": "Kontakt",
-    "nav.cta": "Kontakt aufnehmen",
     "nav.menu": "Menü öffnen",
+    "nav.close": "Menü schließen",
+    "nav.main": "Hauptnavigation",
 
-    // Hero
-    "hero.eyebrow": "Willkommen",
-    "hero.headline": "Playground",
-    "hero.body":
-      "Dies ist das Marken-Grundgerüst. Ersetze Texte, Bilder und Farben, um deine eigene Seite zu gestalten.",
-    "hero.cta": "Produkte entdecken",
+    // Startseite
+    "home.hero": "No Limits",
+    "home.intro.heading": "Your stage. Your rules.",
+    "home.intro.body":
+      "PLAYGROUND ist die Bühne für kulinarische Kreativität. Unsere designorientierten Tischkollektionen geben Ihnen die Freiheit, Ihren eigenen Stil auszudrücken. Mit mutigen Materialien, innovativen Formen und Gespür für Trends ermöglichen wir Präsentationen, die Eindruck hinterlassen – für experimentelles, modernes Food-Design.",
+    "home.intro.cta": "Mehr zur Marke",
+    "home.collections.heading": "Kollektionen",
+    "home.collections.cta": "Zur Kollektionsübersicht",
+    "home.feed.heading": "Made to be seen",
+    "home.feed.body":
+      "No Limits. Auch im Feed. Inszenierungen, Kombinationen und Trends aus der PLAYGROUND-Community. Lassen Sie sich für Ihr nächstes Tischbild inspirieren.",
+    "home.feed.cta": "Mehr auf Instagram",
+    "home.contact.heading": "Let’s play",
+    "home.contact.body":
+      "Sie haben eine Idee oder ein Tischbild im Kopf, das Ihre Handschrift trägt? Lassen Sie uns darüber sprechen. Ob neue Kollektion, Mix & Match oder die passende Bühne für Ihre Gerichte – wir zeigen Ihnen die Möglichkeiten, die Komposition bleibt bei Ihnen.",
+    "home.contact.cta": "Kontakt aufnehmen",
 
-    // Brand story
-    "brand.eyebrow": "Über uns",
-    "brand.heading": "Wofür wir stehen",
-    "brand.body":
-      "Erzähl hier die Geschichte deiner Marke: Was macht euch aus, was treibt euch an, was haben eure Kundinnen und Kunden davon. Zwei bis vier Sätze reichen für den ersten Eindruck.",
-    "brand.cta": "Mehr über uns",
+    // Slider
+    "slider.prev": "Zurück",
+    "slider.next": "Weiter",
 
-    // Products
-    "products.eyebrow": "Produkte",
-    "products.heading": "Unsere Produkte",
-    "products.subtitle":
-      "Eine kurze Einführung in dein Sortiment. Jede Karte unten ist ein Produkt – die Inhalte pflegst du zentral in einer Datei.",
-    "products.viewAll": "Alle Produkte ansehen",
-    "products.cta": "Details ansehen",
-
-    // Contact
-    "contact.eyebrow": "Kontakt",
-    "contact.heading": "Lass uns sprechen",
-    "contact.body":
-      "Fragen, Wünsche oder eine Zusammenarbeit? Schreib uns – wir melden uns zeitnah zurück.",
+    // Kontakt
     "contact.email": "hallo@playground.example",
-    "contact.cta": "E-Mail schreiben",
 
     // Footer
-    "footer.tagline": "Deine Marke in einem Satz.",
-    "footer.rights": "Alle Rechte vorbehalten.",
+    "footer.copy": "© 2026 BHS tabletop AG",
     "footer.impressum": "Impressum",
     "footer.datenschutz": "Datenschutz",
     "footer.cookieSettings": "Cookie-Einstellungen",
+    "footer.instagram": "PLAYGROUND auf Instagram",
 
     // Cookie banner
     "cookie.title": "Wir verwenden Cookies",
     "cookie.text":
-      "Wir nutzen notwendige Cookies, damit diese Website funktioniert. Mit deiner Zustimmung nutzen wir außerdem Analyse-Cookies (über Google Tag Manager), um die Nutzung der Website zu verstehen und zu verbessern. Mehr dazu in unserer",
+      "Wir nutzen notwendige Cookies, damit diese Website funktioniert. Mit Ihrer Zustimmung nutzen wir außerdem Analyse-Cookies (über Google Tag Manager), um die Nutzung der Website zu verstehen und zu verbessern. Mehr dazu in unserer",
     "cookie.privacyLink": "Datenschutzerklärung",
     "cookie.acceptAll": "Alle akzeptieren",
     "cookie.rejectAll": "Nur notwendige",
-
-    // Product detail
-    "productDetail.back": "← Alle Produkte",
-    "productDetail.cta": "Jetzt anfragen",
 
     // Legal
     "impressum.eyebrow": "Rechtliches",
@@ -76,57 +67,53 @@ export const ui = {
     "datenschutz.eyebrow": "Rechtliches",
     "datenschutz.title": "Datenschutzerklärung",
 
-    // Instagram (optional, später aktivierbar)
+    // Instagram
     "instagram.title": "Instagram",
     "instagram.subtitle": "Aktuelle Beiträge direkt aus unserem Instagram-Account.",
     "instagram.loading": "Beiträge werden geladen …",
     "instagram.empty": "Aktuell sind keine Beiträge verfügbar.",
     "instagram.error": "Instagram-Beiträge konnten gerade nicht geladen werden.",
-    "instagram.cta": "Mehr auf Instagram ansehen",
+    "instagram.cta": "Mehr auf Instagram",
   },
   en: {
-    "site.title": "Playground | Your Brand",
+    "site.title": "PLAYGROUND | Your stage. Your rules.",
     "site.description":
-      "Playground – a brand and product site built on Astro, Tailwind CSS and Cloudflare Pages.",
+      "PLAYGROUND is the stage for culinary creativity: design-led table collections by BHS tabletop for experimental, modern food design.",
 
     "nav.home": "Home",
-    "nav.products": "Products",
-    "nav.about": "About",
+    "nav.collections": "Collections",
+    "nav.about": "About the brand",
     "nav.contact": "Contact",
-    "nav.cta": "Get in touch",
     "nav.menu": "Open menu",
+    "nav.close": "Close menu",
+    "nav.main": "Main navigation",
 
-    "hero.eyebrow": "Welcome",
-    "hero.headline": "Playground",
-    "hero.body":
-      "This is the brand scaffold. Replace copy, images and colors to craft your own site.",
-    "hero.cta": "Explore products",
+    "home.hero": "No Limits",
+    "home.intro.heading": "Your stage. Your rules.",
+    "home.intro.body":
+      "PLAYGROUND is the stage for culinary creativity. Our design-led table collections give you the freedom to express your own style. With bold materials, innovative shapes and a feel for trends, we make presentations that leave an impression – for experimental, modern food design.",
+    "home.intro.cta": "More about the brand",
+    "home.collections.heading": "Collections",
+    "home.collections.cta": "See all collections",
+    "home.feed.heading": "Made to be seen",
+    "home.feed.body":
+      "No Limits. In the feed, too. Settings, combinations and trends from the PLAYGROUND community. Find inspiration for your next table.",
+    "home.feed.cta": "More on Instagram",
+    "home.contact.heading": "Let’s play",
+    "home.contact.body":
+      "Do you have an idea or a table setting in mind that carries your signature? Let’s talk about it. Whether a new collection, mix & match or the right stage for your dishes – we show you the possibilities, the composition stays yours.",
+    "home.contact.cta": "Get in touch",
 
-    "brand.eyebrow": "About us",
-    "brand.heading": "What we stand for",
-    "brand.body":
-      "Tell your brand's story here: what sets you apart, what drives you, what your customers gain. Two to four sentences are enough for a first impression.",
-    "brand.cta": "More about us",
+    "slider.prev": "Previous",
+    "slider.next": "Next",
 
-    "products.eyebrow": "Products",
-    "products.heading": "Our products",
-    "products.subtitle":
-      "A short intro to your range. Each card below is a product – you manage the content centrally in one file.",
-    "products.viewAll": "View all products",
-    "products.cta": "View details",
-
-    "contact.eyebrow": "Contact",
-    "contact.heading": "Let's talk",
-    "contact.body":
-      "Questions, ideas or a collaboration? Write to us – we'll get back to you soon.",
     "contact.email": "hallo@playground.example",
-    "contact.cta": "Send an email",
 
-    "footer.tagline": "Your brand in one sentence.",
-    "footer.rights": "All rights reserved.",
+    "footer.copy": "© 2026 BHS tabletop AG",
     "footer.impressum": "Legal notice",
-    "footer.datenschutz": "Privacy policy",
+    "footer.datenschutz": "Privacy",
     "footer.cookieSettings": "Cookie settings",
+    "footer.instagram": "PLAYGROUND on Instagram",
 
     "cookie.title": "We use cookies",
     "cookie.text":
@@ -134,9 +121,6 @@ export const ui = {
     "cookie.privacyLink": "privacy policy",
     "cookie.acceptAll": "Accept all",
     "cookie.rejectAll": "Necessary only",
-
-    "productDetail.back": "← All products",
-    "productDetail.cta": "Enquire now",
 
     "impressum.eyebrow": "Legal",
     "impressum.title": "Legal notice",
@@ -148,7 +132,7 @@ export const ui = {
     "instagram.loading": "Loading posts …",
     "instagram.empty": "No posts are available right now.",
     "instagram.error": "Instagram posts couldn't be loaded right now.",
-    "instagram.cta": "See more on Instagram",
+    "instagram.cta": "More on Instagram",
   },
 } as const;
 
