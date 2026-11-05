@@ -10,12 +10,14 @@ interface Props {
   bleed?: boolean;
   id?: string;
   as?: "h1" | "h2";
+  /** Vertikale Ausrichtung der Überschrift zum Inhalt */
+  align?: "start" | "center";
 }
 
-const { heading, side = "left", bleed = false, id, as: Tag = "h2" } = Astro.props;
+const { heading, side = "left", bleed = false, id, as: Tag = "h2", align = "start" } = Astro.props;
 ---
 
-<section id={id} class:list={["pg-split", `pg-split--${side}`, { "pg-split--bleed": bleed }]}>
+<section id={id} class:list={["pg-split", `pg-split--${side}`, { "pg-split--bleed": bleed, "pg-split--center": align === "center" }]}>
   <Tag class="pg-split__heading"><span>{heading}</span></Tag>
   <div class="pg-split__body">
     <slot />
@@ -31,6 +33,9 @@ const { heading, side = "left", bleed = false, id, as: Tag = "h2" } = Astro.prop
     display: grid;
     grid-template-columns: var(--content-inset) var(--rail) minmax(0, 1fr) var(--content-inset);
     align-items: start;
+  }
+  .pg-split--center {
+    align-items: center;
   }
   .pg-split--left .pg-split__heading {
     grid-column: 2;

@@ -1,0 +1,117 @@
+---
+import { getLangFromUrl } from "../i18n/ui";
+import { brand } from "../data/brand";
+import { INSTAGRAM_URL } from "../consts";
+import PageHero from "./PageHero.astro";
+import Split from "./Split.astro";
+import Slider from "./Slider.astro";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<PageHero title={brand.hero[lang]} image="/images/marke-hero.jpg" alt={brand.heroAlt[lang]} />
+
+<section class="pg-section pg-brand__intro">
+  <h2>{brand.intro.heading[lang]}</h2>
+  <p class="pg-lead">{brand.intro.body[lang]}</p>
+</section>
+
+<Split heading={brand.material.heading[lang]} bleed>
+  <Slider label={brand.material.heading[lang]}>
+    {
+      brand.material.slides.map((src) => (
+        <img class="pg-brand__slide" src={src} alt={brand.material.slideAlt[lang]} loading="lazy" />
+      ))
+    }
+  </Slider>
+  <p class="pg-lead pg-brand__text">{brand.material.body[lang]}</p>
+</Split>
+
+<Split heading={brand.mix.heading[lang]} side="right" bleed>
+  <img class="pg-brand__mix" src={brand.mix.image} alt={brand.mix.alt[lang]} loading="lazy" />
+  <div class="pg-brand__mixtext">
+    <p class="pg-lead">{brand.mix.body[lang]}</p>
+    <a class="pg-btn" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">{brand.mix.cta[lang]}</a>
+  </div>
+</Split>
+
+<section class="pg-section pg-brand__videosec">
+  <div class="pg-brand__video" role="img" aria-label={brand.video.label[lang]}>
+    <h2>{brand.video.heading[lang]}</h2>
+  </div>
+</section>
+
+<style>
+  .pg-brand__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    padding-inline: 20px;
+    padding-top: clamp(64px, 8vw, 120px);
+  }
+  .pg-brand__intro h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .pg-brand__slide {
+    width: clamp(240px, 26.4vw, 380px);
+    aspect-ratio: 380 / 520;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  .pg-brand__text {
+    margin-top: clamp(32px, 4vw, 56px);
+  }
+
+  .pg-brand__mix {
+    width: 100%;
+    aspect-ratio: 1030 / 454;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  .pg-brand__mixtext {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: clamp(32px, 4vw, 56px);
+    padding-inline: 20px;
+  }
+  @media (min-width: 821px) {
+    .pg-brand__mixtext {
+      /* Figma: Text ab x=410, Button endet bündig mit dem Bild (x=1030) */
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      padding-left: calc(var(--content-inset) + 160px);
+      padding-right: 0;
+    }
+    .pg-brand__mixtext .pg-btn {
+      width: 244px;
+      padding: 0;
+    }
+  }
+
+  .pg-brand__videosec {
+    padding-inline: var(--content-inset);
+  }
+  .pg-brand__video {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 940 / 556;
+    background: var(--color-placeholder);
+    padding: 20px;
+  }
+  .pg-brand__video h2 {
+    margin: 0;
+    color: var(--color-accent);
+    text-align: center;
+    font-size: clamp(2rem, 1.2rem + 2.6vw, 3.75rem);
+    line-height: 1.05;
+  }
+</style>

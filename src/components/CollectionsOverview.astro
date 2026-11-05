@@ -1,0 +1,104 @@
+---
+import { getLangFromUrl, getLocalizedPath } from "../i18n/ui";
+import { collections } from "../data/collections";
+import { overview } from "../data/overview";
+import PageHero from "./PageHero.astro";
+import Split from "./Split.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const path = (p: string) => getLocalizedPath(p, lang);
+---
+
+<PageHero title={overview.title[lang]} image={overview.heroImage} />
+
+<section class="pg-section pg-ov-intro">
+  <h2>{overview.heading[lang]}</h2>
+  <p class="pg-lead">{overview.body[lang]}</p>
+</section>
+
+{
+  collections.map((c, i) => (
+    <Split heading={c.name} side={i % 2 === 0 ? "left" : "right"} bleed align="center">
+      <a
+        class:list={["pg-ov-item", i % 2 === 0 ? "pg-ov-item--left" : "pg-ov-item--right"]}
+        href={path(`/kollektionen/${c.slug}`)}
+        aria-label={`${overview.openCollection[lang]} ${c.name}`}
+      >
+        <span class="pg-ov-item__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+        <img src={overview.images[c.slug]} alt="" loading="lazy" />
+      </a>
+    </Split>
+  ))
+}
+
+<style>
+  .pg-ov-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(24px, 3vw, 44px);
+    padding-inline: 20px;
+    padding-top: clamp(72px, 12vw, 182px);
+    padding-bottom: clamp(24px, 3vw, 44px);
+  }
+  .pg-ov-intro h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+    line-height: 1.05;
+  }
+  .pg-ov-intro .pg-lead {
+    max-width: 619px;
+  }
+
+  .pg-ov-item {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    margin-block: clamp(40px, 5vw, 70px);
+  }
+  .pg-ov-item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1030 / 454;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  .pg-ov-item__num {
+    position: absolute;
+    top: clamp(-105px, -7.3vw, -40px);
+    z-index: 1;
+    font-family: var(--font-display-stack);
+    font-weight: 700;
+    font-size: clamp(5rem, 13.9vw, 12.5rem);
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+  }
+  .pg-ov-item--left .pg-ov-item__num {
+    left: clamp(-40px, -2.8vw, -10px);
+  }
+  .pg-ov-item--right .pg-ov-item__num {
+    right: clamp(-10px, -0.7vw, 0px);
+    left: auto;
+  }
+  .pg-ov-item:hover img {
+    filter: brightness(1.08);
+  }
+  .pg-ov-item:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 6px;
+  }
+
+  @media (max-width: 820px) {
+    .pg-ov-item--left .pg-ov-item__num {
+      left: 0;
+    }
+    .pg-ov-item--right .pg-ov-item__num {
+      right: 20px;
+    }
+    .pg-ov-item__num {
+      top: -48px;
+    }
+  }
+</style>

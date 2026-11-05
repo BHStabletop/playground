@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BrandPage from "../components/BrandPage.astro";
+import { getLangFromUrl } from "../i18n/ui";
+import { brand } from "../data/brand";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<Layout title={brand.metaTitle[lang]} description={brand.metaDescription[lang]}>
+  <BrandPage />
+</Layout>
