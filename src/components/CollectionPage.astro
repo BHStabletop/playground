@@ -1,0 +1,87 @@
+---
+import { getLangFromUrl } from "../i18n/ui";
+import type { Collection } from "../data/collections";
+import PageHero from "./PageHero.astro";
+import Split from "./Split.astro";
+import Slider from "./Slider.astro";
+import CollectionGroup from "./CollectionGroup.astro";
+
+/** Kollektions-Detailseite: Hero, Intro, Serien-Gruppen, „On stage“-Slider. Datengetrieben über `collection.groups`. */
+interface Props {
+  collection: Collection;
+}
+
+const { collection: c } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+// Benannte Gruppen wechseln die Überschriften-Seite (links, rechts, …); Linie nur zwischen benannten Gruppen
+let named = -1;
+const groups = c.groups.map((group, i) => {
+  if (group.name) named += 1;
+  return {
+    group,
+    side: (named % 2 === 0 ? "left" : "right") as "left" | "right",
+    rule: !!group.name && c.groups.slice(0, i).some((g) => g.name),
+  };
+});
+---
+
+<PageHero title={c.name} image={c.hero} />
+
+<section class="cp-intro">
+  <h2>{c.headline}</h2>
+  <p class="pg-lead">{c.intro[lang]}</p>
+</section>
+
+<div class="cp-groups">
+  {groups.map((g) => <CollectionGroup group={g.group} side={g.side} rule={g.rule} />)}
+</div>
+
+{
+  c.stage.length > 0 && (
+    <div class="cp-stage">
+      <Split heading="On stage" id="on-stage" bleed>
+        <Slider label="On stage">
+          {c.stage.map((src, i) => (
+            <img class="cp-stage__img" src={src} alt={`${c.name} – On stage ${i + 1}`} loading="lazy" />
+          ))}
+        </Slider>
+      </Split>
+    </div>
+  )
+}
+
+<style>
+  .cp-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    padding: clamp(80px, 12.6vw, 182px) 20px 0;
+    margin-bottom: clamp(64px, 11.2vw, 161px);
+  }
+  .cp-intro h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .cp-stage {
+    margin-top: clamp(64px, 18vw, 260px);
+    margin-bottom: clamp(24px, 9vw, 120px);
+  }
+  .cp-stage :global(.pg-split) {
+    padding-bottom: calc(var(--section-gap) / 2);
+  }
+  .cp-stage__img {
+    width: 100%;
+    aspect-ratio: 1030 / 454;
+    object-fit: cover;
+    background: var(--color-surface);
+  }
+  /* Slides füllen die Spalte (Figma: 1030×454 bis zum Bildschirmrand) */
+  .cp-stage :global([data-track] > *) {
+    width: 100%;
+  }
+</style>

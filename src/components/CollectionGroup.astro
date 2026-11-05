@@ -1,0 +1,123 @@
+---
+import type { SeriesGroup } from "../data/collections";
+import Split from "./Split.astro";
+import CollectionSeries from "./CollectionSeries.astro";
+
+/**
+ * Eine Serien-Gruppe. Mit `group.name`: Split-Sektion (vertikale Überschrift, abwechselnd links/rechts)
+ * mit 3-Spalten-Raster; ohne Namen: freie Bildkomposition (feature-left/right, banner).
+ */
+interface Props {
+  group: SeriesGroup;
+  side?: "left" | "right";
+  /** Dünne Trennlinie über der Gruppe (Figma: 940px, zwischen den Stoneware-Gruppen) */
+  rule?: boolean;
+}
+
+const { group, side = "left", rule = false } = Astro.props;
+const { layout } = group;
+const sizeOf = (feature?: boolean) =>
+  layout === "grid" ? "tile" : layout === "banner" ? "banner" : feature ? "feature" : "mid";
+---
+
+<div class:list={["cg", { "cg--named": !!group.name }]}>
+  {rule && <hr class="cg__rule" />}
+  {
+    group.name ? (
+      <Split heading={group.name} side={side}>
+        <div class:list={["cg__grid", `cg__grid--${side}`]}>
+          {group.series.map((s) => (
+            <CollectionSeries series={s} size="tile" />
+          ))}
+        </div>
+      </Split>
+    ) : (
+      <div class={`cg__frame cg__frame--${layout}`}>
+        {group.series.map((s) => (
+          <CollectionSeries series={s} size={sizeOf(s.feature)} />
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .cg {
+    max-width: var(--page-max);
+    margin: 0 auto;
+  }
+  .cg + .cg:not(.cg--named) {
+    margin-top: clamp(40px, 4.2vw, 60px);
+  }
+  .cg--named :global(.pg-split) {
+    padding-block: 0;
+  }
+
+  .cg__rule {
+    height: 0;
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+    margin: clamp(56px, 6.9vw, 100px) var(--content-inset) clamp(64px, 8.9vw, 128px);
+  }
+
+  /* Figma: 3 × 220px, 20px Abstand, 55px zwischen den Reihen; links bündig zur rechten Kante (x=490–1190) */
+  .cg__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(32px, 3.8vw, 55px) clamp(10px, 1.4vw, 20px);
+    max-width: 700px;
+    align-items: start;
+  }
+  .cg__grid--left {
+    margin-left: auto;
+  }
+
+  /* Freie Kompositionen: Content 940px breit (x=250–1190) */
+  .cg__frame {
+    --gap-x: clamp(24px, 6.9vw, 100px);
+    display: grid;
+    gap: clamp(32px, 3.9vw, 56px) var(--gap-x);
+    padding-inline: var(--content-inset);
+  }
+  .cg__frame--feature-left {
+    grid-template-columns: 460fr 380fr;
+  }
+  .cg__frame--feature-right {
+    grid-template-columns: 380fr 460fr;
+  }
+  .cg__frame--feature-left > :global(.cs--feature) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .cg__frame--feature-right > :global(.cs--feature) {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  @media (max-width: 820px) {
+    .cg__grid,
+    .cg__grid--left {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px 12px;
+      max-width: none;
+      margin-left: 0;
+    }
+    .cg__rule {
+      margin-inline: 20px;
+    }
+    .cg__frame {
+      padding-inline: 20px;
+      gap: 32px 12px;
+    }
+    .cg__frame--feature-left,
+    .cg__frame--feature-right {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cg__frame--feature-left > :global(.cs--feature),
+    .cg__frame--feature-right > :global(.cs--feature) {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      order: -1;
+    }
+  }
+</style>

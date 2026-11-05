@@ -3,15 +3,28 @@ import type { Lang } from "../i18n/ui";
 /**
  * Die vier PLAYGROUND-Welten. Reihenfolge = Reihenfolge in Navigation, Slider und Übersicht.
  * Bilder liegen in /public/images. Serien je Kollektion stehen in `groups`.
+ *
+ * Bildpfade: Serien `/images/<kollektion>/<serie-kebab>.jpg`, Hero/Teaser `/images/<kollektion>-hero|teaser.jpg`,
+ * „On stage“ `/images/<kollektion>-stage-<n>.jpg`.
  */
 export interface Series {
   name: string;
   image: string;
+  /** Nur bei `feature-*`-Layouts: das große Hochformat-Bild (460×678) */
+  feature?: boolean;
 }
 
+/**
+ * - `grid`: 220×250-Kacheln, 3 Spalten, Gruppenname als vertikale Überschrift (Stoneware)
+ * - `feature-left` / `feature-right`: ein großes Hochformat (460×678) plus zwei gestapelte 380×282-Bilder
+ * - `banner`: ein Querformat über die volle Inhaltsbreite (940×282)
+ */
+export type GroupLayout = "grid" | "feature-left" | "feature-right" | "banner";
+
 export interface SeriesGroup {
-  /** Gruppenname, z. B. "Essentials" (wird als vertikale Überschrift gesetzt) */
-  name: string;
+  /** Gruppenname, z. B. "Essentials" (wird als vertikale Überschrift gesetzt); ohne Namen keine Überschrift */
+  name?: string;
+  layout: GroupLayout;
   series: Series[];
 }
 
@@ -24,7 +37,26 @@ export interface Collection {
   hero: string;
   teaser: string;
   groups: SeriesGroup[];
+  /** Bilder des „On stage“-Sliders (1030×454) */
+  stage: string[];
 }
+
+const kebab = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/&/g, " ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const series = (slug: string, names: string[], feature?: string): Series[] =>
+  names.map((name) => ({
+    name,
+    image: `/images/${slug}/${kebab(name)}.jpg`,
+    ...(name === feature ? { feature: true } : {}),
+  }));
+
+const stage = (slug: string, count = 3) =>
+  Array.from({ length: count }, (_, i) => `/images/${slug}-stage-${i + 1}.jpg`);
 
 export const collections: Collection[] = [
   {
@@ -37,7 +69,13 @@ export const collections: Collection[] = [
     },
     hero: "/images/stoneware-hero.jpg",
     teaser: "/images/stoneware-teaser.jpg",
-    groups: [],
+    groups: [
+      { name: "Essentials", layout: "grid", series: series("stoneware", ["ELEMENTS", "RENEW"]) },
+      { name: "Extraordinary", layout: "grid", series: series("stoneware", ["AURA", "EMBRACE", "SILENTO", "NAMI", "2IN1", "GLOW"]) },
+      { name: "Prime", layout: "grid", series: series("stoneware", ["NARA", "SEA", "SPOT ON"]) },
+      { name: "Treasures", layout: "grid", series: series("stoneware", ["MUSE", "SHELLS", "BREAD & BITE", "SAVANNA", "BLUE PEARL", "TERRA", "TAVOLINI", "COAST & COUNTRY", "YUM!"]) },
+    ],
+    stage: stage("stoneware"),
   },
   {
     slug: "platforms",
@@ -49,19 +87,28 @@ export const collections: Collection[] = [
     },
     hero: "/images/platforms-hero.jpg",
     teaser: "/images/platforms-teaser.jpg",
-    groups: [],
+    groups: [
+      { layout: "feature-right", series: series("platforms", ["ANANTI", "LOFT", "ELEVATE"], "ELEVATE") },
+      { layout: "banner", series: series("platforms", ["ARC"]) },
+    ],
+    stage: stage("platforms"),
   },
   {
     slug: "spotlights",
     name: "Spotlights",
-    headline: "Material matters",
+    headline: "Crafted for creativity",
     intro: {
       de: "Und plötzlich wird das Alltägliche besonders: Bei SPOTLIGHTS spielen Materialien, Formen und Strukturen zusammen und machen Speisen zu kleinen Inszenierungen. Aus Stein, Holz und Glas entsteht die Bühne für Beilagen und Details, aufregend anders oder besonders hochwertig.",
       en: "Suddenly the everyday becomes special: with SPOTLIGHTS, materials, shapes and textures work together and turn food into small performances. Stone, wood and glass become the stage for sides and details, excitingly different or especially refined.",
     },
     hero: "/images/spotlights-hero.jpg",
     teaser: "/images/spotlights-teaser.jpg",
-    groups: [],
+    groups: [
+      { layout: "feature-left", series: series("spotlights", ["STAINLESS STEEL", "CAST IRON", "NATURAL STONE"], "STAINLESS STEEL") },
+      { layout: "feature-right", series: series("spotlights", ["GLASS", "BAMBOO", "WOOD"], "WOOD") },
+      { layout: "banner", series: series("spotlights", ["TERRACOTTA"]) },
+    ],
+    stage: stage("spotlights"),
   },
   {
     slug: "additions",
@@ -73,7 +120,11 @@ export const collections: Collection[] = [
     },
     hero: "/images/additions-hero.jpg",
     teaser: "/images/additions-teaser.jpg",
-    groups: [],
+    groups: [
+      { layout: "feature-left", series: series("additions", ["POTS & POURERS", "BREAD BASKETS", "SEASONING"], "POTS & POURERS") },
+      { layout: "banner", series: series("additions", ["CUTLERY"]) },
+    ],
+    stage: stage("additions"),
   },
 ];
 

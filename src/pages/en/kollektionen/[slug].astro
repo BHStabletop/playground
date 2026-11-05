@@ -1,0 +1,15 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import CollectionPage from "../../../components/CollectionPage.astro";
+import { collections } from "../../../data/collections";
+
+export function getStaticPaths() {
+  return collections.map((collection) => ({ params: { slug: collection.slug }, props: { collection } }));
+}
+
+const { collection } = Astro.props;
+---
+
+<Layout title={`${collection.name} | PLAYGROUND`} description={collection.intro.en}>
+  <CollectionPage collection={collection} />
+</Layout>
