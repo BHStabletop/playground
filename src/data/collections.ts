@@ -75,7 +75,7 @@ export const collections: Collection[] = [
       { name: "Prime", layout: "grid", series: series("stoneware", ["NARA", "SEA", "SPOT ON"]) },
       { name: "Treasures", layout: "grid", series: series("stoneware", ["MUSE", "SHELLS", "BREAD & BITE", "SAVANNA", "BLUE PEARL", "TERRA", "TAVOLINI", "COAST & COUNTRY", "YUM!"]) },
     ],
-    stage: stage("stoneware"),
+    stage: stage("stoneware", 4),
   },
   {
     slug: "platforms",
@@ -88,8 +88,8 @@ export const collections: Collection[] = [
     hero: "/images/platforms-hero.jpg",
     teaser: "/images/platforms-teaser.jpg",
     groups: [
-      { layout: "feature-right", series: series("platforms", ["ANANTI", "LOFT", "ELEVATE"], "ELEVATE") },
-      { layout: "banner", series: series("platforms", ["ARC"]) },
+      { layout: "feature-right", series: series("platforms", ["ARC", "ELEVATE", "ANANTI"], "ANANTI") },
+      { layout: "banner", series: series("platforms", ["LOFT"]) },
     ],
     stage: stage("platforms"),
   },
@@ -104,9 +104,9 @@ export const collections: Collection[] = [
     hero: "/images/spotlights-hero.jpg",
     teaser: "/images/spotlights-teaser.jpg",
     groups: [
-      { layout: "feature-left", series: series("spotlights", ["STAINLESS STEEL", "CAST IRON", "NATURAL STONE"], "STAINLESS STEEL") },
+      { layout: "feature-left", series: series("spotlights", ["STAINLESS STEEL", "CAST IRON", "TERRACOTTA"], "STAINLESS STEEL") },
       { layout: "feature-right", series: series("spotlights", ["GLASS", "BAMBOO", "WOOD"], "WOOD") },
-      { layout: "banner", series: series("spotlights", ["TERRACOTTA"]) },
+      { layout: "banner", series: series("spotlights", ["NATURAL STONE"]) },
     ],
     stage: stage("spotlights"),
   },
@@ -122,9 +122,9 @@ export const collections: Collection[] = [
     teaser: "/images/additions-teaser.jpg",
     groups: [
       { layout: "feature-left", series: series("additions", ["POTS & POURERS", "BREAD BASKETS", "SEASONING"], "POTS & POURERS") },
-      { layout: "banner", series: series("additions", ["CUTLERY"]) },
+      { layout: "feature-right", series: series("additions", ["STRAWS", "VASES", "CUTLERY"], "CUTLERY") },
     ],
-    stage: stage("additions"),
+    stage: stage("additions", 4),
   },
 ];
 

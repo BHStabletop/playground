@@ -5,24 +5,15 @@ interface Props {
 }
 
 const { tone = "accent", class: className = "" } = Astro.props;
-// Platzhalter-Wortmarke, bis die Logo-Dateien (Logo_Playground_RGB / _WEISS) in /public/images liegen.
+const src = tone === "white" ? "/images/logo-playground-weiss.png" : "/images/logo-playground-orange.png";
 ---
 
-<span class:list={["pg-logo", `pg-logo--${tone}`, className]}>PLAYGROUND</span>
+<img class:list={["pg-logo", className]} src={src} alt="PLAYGROUND" width="625" height="104" />
 
 <style>
   .pg-logo {
-    display: inline-block;
-    font-family: var(--font-display-stack);
-    font-weight: 400;
-    font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.4rem);
-    letter-spacing: 0.04em;
-    line-height: 1;
-  }
-  .pg-logo--accent {
-    color: var(--color-accent);
-  }
-  .pg-logo--white {
-    color: #fff;
+    display: block;
+    height: clamp(24px, 1rem + 1.2vw, 38px);
+    width: auto;
   }
 </style>
