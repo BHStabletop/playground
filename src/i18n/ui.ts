@@ -56,7 +56,7 @@ export const ui = {
     // Cookie banner
     "cookie.title": "Wir verwenden Cookies",
     "cookie.text":
-      "Wir nutzen notwendige Cookies, damit diese Website funktioniert. Mit Ihrer Zustimmung nutzen wir außerdem Analyse-Cookies (über Google Tag Manager), um die Nutzung der Website zu verstehen und zu verbessern. Mehr dazu in unserer",
+      "Wir nutzen notwendige Cookies, damit diese Website funktioniert. Mit deiner Zustimmung nutzen wir außerdem Google Analytics (über Google Tag Manager), um die Nutzung der Website zu verstehen und zu verbessern. Mehr dazu in unserer",
     "cookie.privacyLink": "Datenschutzerklärung",
     "cookie.acceptAll": "Alle akzeptieren",
     "cookie.rejectAll": "Nur notwendige",
@@ -117,15 +117,15 @@ export const ui = {
 
     "cookie.title": "We use cookies",
     "cookie.text":
-      "We use necessary cookies to make this site work. With your consent, we also use analytics cookies (via Google Tag Manager) to understand and improve how the site is used. Learn more in our",
+      "We use necessary cookies to make this site work. With your consent, we also use Google Analytics (via Google Tag Manager) to understand and improve how the site is used. Learn more in our",
     "cookie.privacyLink": "privacy policy",
     "cookie.acceptAll": "Accept all",
     "cookie.rejectAll": "Necessary only",
 
     "impressum.eyebrow": "Legal",
-    "impressum.title": "Legal notice",
+    "impressum.title": "Legal Notice",
     "datenschutz.eyebrow": "Legal",
-    "datenschutz.title": "Privacy policy",
+    "datenschutz.title": "Privacy Policy",
 
     "instagram.title": "Instagram",
     "instagram.subtitle": "Latest posts straight from our Instagram account.",

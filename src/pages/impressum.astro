@@ -6,34 +6,68 @@ const lang: Lang = "de";
 const t = useTranslations(lang);
 ---
 
-<Layout title={`${t("impressum.title")} | Playground`}>
+<Layout title={`${t("impressum.title")} | Playground`} description="Impressum von PLAYGROUND, einer Marke der BHS tabletop AG.">
   <section class="pg-section">
     <div class="pg-prose">
       <p class="pg-eyebrow">{t("impressum.eyebrow")}</p>
       <h1>{t("impressum.title")}</h1>
 
-      <!-- PLATZHALTER – mit echten Angaben ersetzen (gesetzlich vorgeschrieben, § 5 DDG/TMG). -->
-      <h2>Angaben gemäß § 5 DDG</h2>
+      <h2>Angaben gemäß § 5 TMG</h2>
       <p>
-        Firmenname<br />
-        Straße und Hausnummer<br />
-        PLZ Ort
+        PLAYGROUND ist eine Marke der BHS tabletop AG. Verantwortlich für den Inhalt dieser Website ist:
       </p>
-
-      <h2>Vertreten durch</h2>
-      <p>Name der vertretungsberechtigten Person</p>
+      <p>
+        <strong>BHS tabletop AG</strong><br />
+        Ludwigsmühle 1<br />
+        95100 Selb<br />
+        Deutschland
+      </p>
 
       <h2>Kontakt</h2>
       <p>
-        Telefon: +49 …<br />
-        E-Mail: hallo@playground.example
+        Telefon: +49 9287 73-0<br />
+        Internet: <a href="https://www.bhs-tabletop.de" target="_blank" rel="noopener noreferrer">www.bhs-tabletop.de</a><br />
+        E-Mail: <a href="mailto:info@bhs-tabletop.de">info@bhs-tabletop.de</a>
       </p>
 
-      <h2>Umsatzsteuer-ID</h2>
-      <p>USt-IdNr. gemäß § 27 a UStG: DE…</p>
+      <h2>Registereintrag</h2>
+      <p>
+        Handelsregister-Nr. HRB 6212, Registergericht Hof<br />
+        USt-IdNr.: DE 311 338 027
+      </p>
 
-      <h2>Verantwortlich für den Inhalt</h2>
-      <p>Name, Anschrift (wie oben)</p>
+      <h2>Vertretungsberechtigte</h2>
+      <p>
+        Vorsitzender des Aufsichtsrats: Christoph Auer<br />
+        Vorstand: Jens Becker (Vorsitzender), Ali Tolu
+      </p>
+      <p>
+        Die BHS tabletop AG ist eine Beteiligung der Serafin Unternehmensgruppe
+        (<a href="https://www.serafin-gruppe.de" target="_blank" rel="noopener noreferrer">www.serafin-gruppe.de</a>).
+      </p>
+
+      <h2>Haftungsausschluss</h2>
+      <p>
+        Die BHS tabletop AG ist stets bemüht, auf dieser Website richtige und vollständige Informationen
+        bereitzustellen, übernimmt jedoch keine Haftung oder Garantie für die Aktualität, Richtigkeit und
+        Vollständigkeit der bereitgestellten Informationen. Dies gilt auch für alle Verlinkungen auf andere
+        Websites, auf die diese Website direkt oder indirekt verweist.
+      </p>
+      <p>
+        Haftungsansprüche gegen die BHS tabletop AG, die sich auf direkte oder indirekte Schäden beziehen, die
+        aufgrund oder in Verbindung mit auf dieser Website bereitgestellten Informationen entstehen, sind
+        ausgeschlossen, sofern seitens der BHS tabletop AG kein nachweislich vorsätzliches oder grob
+        fahrlässiges Verschulden vorliegt.
+      </p>
+
+      <h2>Urheberrecht</h2>
+      <p>
+        Inhalt und Struktur dieser Website sind urheberrechtlich geschützt. Die Vervielfältigung, Verbreitung,
+        Veröffentlichung, Veränderung oder Bearbeitung von Inhalten und Strukturelementen — insbesondere Texte,
+        Bildmaterial, Grafiken und Designelemente — bedarf der ausdrücklichen vorherigen schriftlichen
+        Zustimmung der BHS tabletop AG, soweit diese nach deutschem Recht schutzfähig sind. Zuwiderhandlungen
+        können zivil- und strafrechtlich verfolgt werden.
+      </p>
     </div>
   </section>
 </Layout>

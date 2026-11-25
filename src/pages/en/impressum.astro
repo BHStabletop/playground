@@ -6,31 +6,66 @@ const lang: Lang = "en";
 const t = useTranslations(lang);
 ---
 
-<Layout title={`${t("impressum.title")} | Playground`}>
+<Layout title={`${t("impressum.title")} | Playground`} description="Legal notice for PLAYGROUND, a brand of BHS tabletop AG.">
   <section class="pg-section">
     <div class="pg-prose">
       <p class="pg-eyebrow">{t("impressum.eyebrow")}</p>
       <h1>{t("impressum.title")}</h1>
 
-      <!-- PLACEHOLDER – replace with real company details (legally required under German law). -->
-      <h2>Company details</h2>
+      <h2>Information pursuant to § 5 TMG (German Telemedia Act)</h2>
       <p>
-        Company name<br />
-        Street and number<br />
-        Postcode City, Germany
+        PLAYGROUND is a brand of BHS tabletop AG. The party responsible for the content of this website is:
       </p>
-
-      <h2>Represented by</h2>
-      <p>Name of the authorised representative</p>
+      <p>
+        <strong>BHS tabletop AG</strong><br />
+        Ludwigsmühle 1<br />
+        95100 Selb<br />
+        Germany
+      </p>
 
       <h2>Contact</h2>
       <p>
-        Phone: +49 …<br />
-        Email: hallo@playground.example
+        Phone: +49 9287 73-0<br />
+        Website: <a href="https://www.bhs-tabletop.de" target="_blank" rel="noopener noreferrer">www.bhs-tabletop.de</a><br />
+        Email: <a href="mailto:info@bhs-tabletop.de">info@bhs-tabletop.de</a>
       </p>
 
-      <h2>VAT ID</h2>
-      <p>VAT identification number: DE…</p>
+      <h2>Commercial register</h2>
+      <p>
+        Commercial register no. HRB 6212, Register court Hof<br />
+        VAT ID: DE 311 338 027
+      </p>
+
+      <h2>Authorized representatives</h2>
+      <p>
+        Chairman of the Supervisory Board: Christoph Auer<br />
+        Executive Board: Jens Becker (Chairman), Ali Tolu
+      </p>
+      <p>
+        BHS tabletop AG is a portfolio company of the Serafin Group
+        (<a href="https://www.serafin-gruppe.de" target="_blank" rel="noopener noreferrer">www.serafin-gruppe.de</a>).
+      </p>
+
+      <h2>Disclaimer</h2>
+      <p>
+        BHS tabletop AG makes every effort to provide accurate and complete information on this website, but
+        accepts no liability or guarantee for the timeliness, accuracy, or completeness of the information
+        provided. This also applies to any links to other websites that this website refers to directly or
+        indirectly.
+      </p>
+      <p>
+        Liability claims against BHS tabletop AG relating to direct or indirect damages arising from or in
+        connection with information provided on this website are excluded, unless BHS tabletop AG is proven to
+        have acted with intent or gross negligence.
+      </p>
+
+      <h2>Copyright</h2>
+      <p>
+        The content and structure of this website are protected by copyright. Reproduction, distribution,
+        publication, modification, or other use of content and structural elements — in particular text, images,
+        graphics, and design elements — requires the prior written consent of BHS tabletop AG, insofar as these
+        are protectable under German law. Violations may be prosecuted under civil and criminal law.
+      </p>
     </div>
   </section>
 </Layout>
